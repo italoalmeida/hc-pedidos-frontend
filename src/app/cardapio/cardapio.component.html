@@ -1,0 +1,26 @@
+<h2> {{ titulo }} </h2>
+
+<form (ngSubmit)="onSubmit()">
+  <ul>
+    <li *ngFor="let prato of pratosOfertados">
+      <input type="checkbox"
+        name="pratos"
+        value="{{prato}}"
+        (change)="selecionarPrato()"
+        [(ngModel)]="prato.checked">
+      <strong>{{prato.nome}}</strong>
+      <br>
+      Acompanhamentos:
+      <ul>
+        <li *ngFor="let acompanhamento of prato.acompanhamentos">
+          {{acompanhamento}}
+        </li>
+      </ul>
+      Preço: {{prato.preco}}
+      <br><br>
+    </li>
+  </ul>
+
+  <button type="submit">Finalizar pedido</button>
+
+</form>
