@@ -1,5 +1,9 @@
-<a routerLink="/pedido-realizar">Faça seu pedido</a>
-<br><br>
-<a routerLink="/pedido-detalhe">Detalhes do pedido</a>
+<mat-toolbar color="primary" style="justify-content: space-between">
+  <div>HC Pedidos</div>
+  <div>
+    <button mat-button routerLink="/pedido-realizar">Faça seu pedido</button>
+    <button mat-button routerLink="/pedido-detalhe">Detalhes do pedido</button>
+  </div>
+</mat-toolbar>
 
 <router-outlet></router-outlet>

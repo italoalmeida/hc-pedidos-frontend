@@ -9,6 +9,14 @@ import { PedidoService } from './pedido.service';
 import { routing } from './app.routing';
 import { PedidoRealizarComponent } from './pedido-realizar/pedido-realizar.component';
 import { PedidoDetalheComponent } from './pedido-detalhe/pedido-detalhe.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { 
+  MatToolbarModule,
+  MatButtonModule,
+  MatListModule,
+  MatFormFieldModule,
+  MatInputModule
+} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -20,7 +28,13 @@ import { PedidoDetalheComponent } from './pedido-detalhe/pedido-detalhe.componen
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    routing
+    routing,
+    NoopAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     CardapioService,

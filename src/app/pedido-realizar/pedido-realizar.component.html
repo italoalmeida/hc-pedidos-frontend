@@ -1,32 +1,56 @@
-<h1>{{ titulo }}</h1>
-
-<hr />
-
-<h2>Cardápio</h2>
+<h1
+  class="mat-headline"
+  style="margin: 15px">
+  {{ titulo }}
+</h1>
 
 <form (ngSubmit)="onSubmit()">
-  <ul>
-    <li *ngFor="let prato of pratosOfertados">
-      <input type="checkbox"
-        name="pratos"
-        value="{{prato}}"
-        (change)="selecionarPrato()"
-        [(ngModel)]="prato.checked">
-      <strong>{{prato.nome}}</strong>
-      <br>
-      Acompanhamentos:
-      <ul>
-        <li *ngFor="let acompanhamento of prato.acompanhamentos">
-          {{acompanhamento}}
-        </li>
-      </ul>
-      Preço: R$ {{prato.preco.toFixed(2)}}
-      <br><br>
-    </li>
-  </ul>
-  Preço total do pedido: R$ {{precoTotal.toFixed(2)}}
-  <br><br>
-  <button type="submit">Finalizar pedido</button>
-  <br>
-  {{mensagem}}
+  <div style="margin: 15px">
+
+    <mat-selection-list
+      name="pratos"
+      [(ngModel)]="pratosSelecionados">
+      <mat-list-option
+        *ngFor="let prato of pratosOfertados"
+        (click)="selecionarPrato()"
+        [value]="prato"
+        checkboxPosition="before">
+        <div class="cardapio-box">
+          <span class="prato-nome">{{prato.nome}}</span>
+          <span class="prato-acompanhamentos">
+            <span *ngFor="let acompanhamento of prato.acompanhamentos | keyvalue">
+              {{acompanhamento.value}}
+              <span *ngIf="acompanhamento.key != prato.acompanhamentos.length-1; then virgula else ponto"></span>
+              <ng-template #virgula>,</ng-template>
+              <ng-template #ponto>.</ng-template>
+            </span>
+          </span>
+          <span class="cardapio-box-item-end preco prato-preco">
+            R$ {{prato.preco.toFixed(2)}}
+          </span>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+    
+    <mat-list>
+      <mat-list-item>
+        <div class="preco-total-box">
+          <span class="label-preco-total">Preço total do pedido:</span>
+          <span class="preco">R$ {{precoTotal.toFixed(2)}}</span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    
+    <div>
+      <button
+        mat-flat-button
+        type="submit"
+        style="text-transform: uppercase"
+        color="primary">
+        Finalizar pedido
+      </button>
+      {{mensagem}}
+    </div>
+  </div>
 </form>

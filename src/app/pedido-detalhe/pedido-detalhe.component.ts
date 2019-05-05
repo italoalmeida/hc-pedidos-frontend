@@ -21,6 +21,10 @@ export class PedidoDetalheComponent implements OnInit {
     // Limpa os campos para receber novos valores recebidos da consulta
     this.pratosPedidos = Array<any>();
     this.mensagem = String();
+
+    // Valida se campo foi submetido vazio
+    if (!this.codigoPedido) return false;
+    
     this.pedidoService.consultar(this.codigoPedido)
       .subscribe(
         // Sucesso

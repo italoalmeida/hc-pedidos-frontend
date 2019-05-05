@@ -1,0 +1,24 @@
+.preco {
+  font-weight: 600;
+}
+.prato-nome {
+  font-weight: 500;
+}
+.prato-acompanhamentos {
+  font-size: 14px;
+  font-weight: 300;
+}
+.prato-acompanhamentos-label {
+  font-size: 13px;
+}
+
+.cardapio-box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 200px repeat(auto-fit, minmax(0, auto));
+  grid-gap: 15px;
+  justify-items: start;
+}
+.cardapio-box-item-end {
+  justify-self: end;
+}

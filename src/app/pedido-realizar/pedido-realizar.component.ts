@@ -27,15 +27,23 @@ export class PedidoRealizarComponent implements OnInit {
     this.pedidoService.pedir(this.pratosSelecionados)
       .subscribe(
         // Sucesso
-        dados => this.mensagem = `O código do seu pedido é: ${dados}`,
+        dados => this.mensagem = `Pedido realizado! Seu código para consulta é: ${dados}`,
         // Erro
         error => this.mensagem = error.error.mensagem
       );
+      
     // Recarrega as opções do cardápio com seleções zeradas
     this.apresentarCardapio();
   }
 
   apresentarCardapio() {
+    // Limpa todos os campos para esperar um novo pedido
+    this.mensagem = String();
+    this.pratosOfertados = Array<any>();
+    this.pratosSelecionados = Array<any>();
+    this.precoTotal = Number();
+
+    // Consulta o cardápio para exibição
     this.cardapioService.consultar()
       .subscribe(pratos => {
         // Cria novo atributo para controlar a opção checked do checkbox
@@ -45,14 +53,10 @@ export class PedidoRealizarComponent implements OnInit {
   }
 
   selecionarPrato() {
-    // Retorna apenas os pratos selecionados no pedido
-    this.pratosSelecionados = this.pratosOfertados
-    .filter(prato => prato.checked);
     // Zera o preço para recalculo
     this.precoTotal = 0;
     // Calcula o preço total dos pratos selecionados
-    this.pratosSelecionados
-      .forEach(prato => this.precoTotal += parseFloat(prato.preco));
+    this.pratosSelecionados.forEach(prato => this.precoTotal += parseFloat(prato.preco));
   }
 
 }

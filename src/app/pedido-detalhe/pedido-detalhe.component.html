@@ -1,32 +1,49 @@
-<h1>{{ titulo }}</h1>
+<h1
+  class="mat-headline"
+  style="margin: 15px">
+  {{ titulo }}
+</h1>
 
-<hr />
+<div style="margin: 15px; margin-top: 30px">
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        name="codigo"
+        [(ngModel)]="codigoPedido"
+        placeholder="Digite o cód. do pedido"
+        required
+        #campoCodigo>
+    </mat-form-field>
+    <button
+      mat-flat-button
+      type="submit"
+      color="primary">
+      Buscar
+    </button>
+    {{mensagem}}
+  </form>
+</div>
 
-<form (ngSubmit)="onSubmit()">
-  Cód. do Pedido:
-  <input type="text" 
-    name="codigo-pedido" 
-    [(ngModel)]="codigoPedido" 
-    required
-    #campoCodigo>
-  <button type="submit" 
-    [disabled]="campoCodigo.classList.contains('ng-invalid')">
-    Pesquisar
-  </button>
-</form>
-<br>
-{{mensagem}}
-<ul>
-  <li *ngFor="let prato of pratosPedidos">
-    <strong>{{prato.nome}}</strong>
-    <br>
-    Acompanhamentos:
-    <ul>
-      <li *ngFor="let acompanhamento of prato.acompanhamentos">
-        {{acompanhamento}}
-      </li>
-    </ul>
-    Preço: {{prato.preco}}
-    <br><br>
-  </li>
-</ul>
+<div style="margin: 15px">
+  <mat-list>
+    <mat-list-item *ngFor="let prato of pratosPedidos">
+      <div class="cardapio-box">
+        <span class="prato-nome">{{prato.nome}}</span>
+        <span class="prato-acompanhamentos">
+          <span *ngFor="let acompanhamento of prato.acompanhamentos | keyvalue">
+            {{acompanhamento.value}}
+            <span *ngIf="acompanhamento.key != prato.acompanhamentos.length-1; then virgula else ponto"></span>
+            <ng-template #virgula>,</ng-template>
+            <ng-template #ponto>.</ng-template>
+          </span>
+        </span>
+        <span class="cardapio-box-item-end preco prato-preco">
+          R$ {{prato.preco.toFixed(2)}}
+        </span>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
