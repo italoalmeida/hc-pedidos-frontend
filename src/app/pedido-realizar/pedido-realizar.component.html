@@ -1,4 +1,8 @@
-<h2> {{ titulo }} </h2>
+<h1>{{ titulo }}</h1>
+
+<hr />
+
+<h2>Cardápio</h2>
 
 <form (ngSubmit)="onSubmit()">
   <ul>
@@ -16,11 +20,13 @@
           {{acompanhamento}}
         </li>
       </ul>
-      Preço: {{prato.preco}}
+      Preço: R$ {{prato.preco.toFixed(2)}}
       <br><br>
     </li>
   </ul>
-
+  Preço total do pedido: R$ {{precoTotal.toFixed(2)}}
+  <br><br>
   <button type="submit">Finalizar pedido</button>
-
+  <br>
+  {{mensagem}}
 </form>

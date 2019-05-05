@@ -1,0 +1,32 @@
+<h1>{{ titulo }}</h1>
+
+<hr />
+
+<form (ngSubmit)="onSubmit()">
+  Cód. do Pedido:
+  <input type="text" 
+    name="codigo-pedido" 
+    [(ngModel)]="codigoPedido" 
+    required
+    #campoCodigo>
+  <button type="submit" 
+    [disabled]="campoCodigo.classList.contains('ng-invalid')">
+    Pesquisar
+  </button>
+</form>
+<br>
+{{mensagem}}
+<ul>
+  <li *ngFor="let prato of pratosPedidos">
+    <strong>{{prato.nome}}</strong>
+    <br>
+    Acompanhamentos:
+    <ul>
+      <li *ngFor="let acompanhamento of prato.acompanhamentos">
+        {{acompanhamento}}
+      </li>
+    </ul>
+    Preço: {{prato.preco}}
+    <br><br>
+  </li>
+</ul>

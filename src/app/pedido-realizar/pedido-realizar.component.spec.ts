@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CardapioComponent } from './cardapio.component';
+import { PedidoRealizarComponent } from './pedido-realizar.component';
 
-describe('CardapioComponent', () => {
-  let component: CardapioComponent;
-  let fixture: ComponentFixture<CardapioComponent>;
+describe('PedidoRealizarComponent', () => {
+  let component: PedidoRealizarComponent;
+  let fixture: ComponentFixture<PedidoRealizarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardapioComponent ]
+      declarations: [ PedidoRealizarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CardapioComponent);
+    fixture = TestBed.createComponent(PedidoRealizarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
