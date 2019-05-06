@@ -24,6 +24,10 @@ export class PedidoRealizarComponent implements OnInit {
   }
   
   onSubmit() {
+    // Evita chamadas sem a seleção dos pratos
+    if (!this.pratosSelecionados.length) return false;
+
+    // Realiza o pedido
     this.pedidoService.pedir(this.pratosSelecionados)
       .subscribe(
         // Sucesso
@@ -45,11 +49,14 @@ export class PedidoRealizarComponent implements OnInit {
 
     // Consulta o cardápio para exibição
     this.cardapioService.consultar()
-      .subscribe(pratos => {
-        // Cria novo atributo para controlar a opção checked do checkbox
-        pratos.map(prato => prato['checked'] = false);
-        this.pratosOfertados = pratos;
-      });
+      .subscribe(
+        pratos => {
+          // Cria novo atributo para controlar a opção checked do checkbox
+          pratos.map(prato => prato['checked'] = false);
+          this.pratosOfertados = pratos;
+        },
+        error => this.mensagem = error.error.mensagem
+      );
   }
 
   selecionarPrato() {
